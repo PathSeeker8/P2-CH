@@ -11,11 +11,15 @@ Description:
 Pseudocode (D&C Convex Hull):
     Preprocessing: Sort the points by x-coordinate
     Divide the set of points into two sets A and B:
+        Mid = ⌊n/2⌋ w/ left on tie
         A contains the left ⌊n/2⌋ points
         B contains the right ⌈n/2⌉ points
-    Recursively compute the convex hull of A
-    Recursively compute the convex hull of B
+    Base Case: n ≤ 3, return the points
+    Conquer: Recursively compute the convex hull of A
+    Conquer: Recursively compute the convex hull of B
     Merge the two convex hulls
+        Find upper and lower tangents
+        Combine the hulls using those tangents
         
 Lines of code (without whitespace/comments):
   - orientation: 1
@@ -42,6 +46,7 @@ import random, time, csv
 # Point = Tuple[float, float]
 # Hull = List[Point]
 
+### Helpers: Orientation, rightmost_point, and leftmost_point are helper functions used in the code.
 # This is a geometric primitive method to determine the orientation (shared knowledge, cited in doc)
 def orientation(a, b, c):
     return (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0])
@@ -76,6 +81,7 @@ def leftmost_point(hull):
             best_x, best_y = x, y
     return best_index
 
+### Tangents: upper_ and lower_tangent handle the connection aspect of the hulls in our code.
 # Calculates the upper tangent between two convex hulls.
 def upper_tangent(left_hull, right_hull):
     left_n = len(left_hull)
@@ -130,6 +136,7 @@ def lower_tangent(left_hull, right_hull):
     
     return left_index, right_index
 
+### Hull merge: Works to handle the merging aspect of the hulls in our code.
 # Essentially merges the hulls together into one using the found upper and lower tangents.
 def hull_merge(left_hull, right_hull):
     if not left_hull:
@@ -185,6 +192,7 @@ def hull_merge(left_hull, right_hull):
     
     return merged
 
+### Convex hull: This is the main driver/problem solver for our code.
 # Main function and direct D&C implementation of Option #5 Convex Hull to get the points.
 def convex_hull(points):
     if not points:
@@ -227,6 +235,7 @@ def convex_hull(points):
 
     return divide_and_conquer(points)
 
+### Main: This is where evrything gets called together at once for measuring purposes.
 # Execution logic and where we do our tests for the values of "n". Put here to save runtime (in case).
 if __name__ == "__main__":
     
