@@ -11,7 +11,7 @@ Submission of my project 2 on the Convex Hull problem.
 Project2_RM:
 - If your Python is up to date, there should be nothing to be done extra here. "random", "time", "csv", "List", "Tuple" are built in libraries.
 - If you intend to run and play around with the values, you can go into the "main" at the bottom and set "n_values" or "min/max_coordinate" to equal whatever numbers you'd like. A csv file is then generated and all subsequent runs are stored in there.
-    - NOTE: Modifying the values -will- affect performance.
+    - NOTE: Modifying the values too high -will- affect performance.
 - This doesn't run with arguments off the cmd line as the assignment didn't ask for it and honestly it wasn't needed.
 - NOTE: We considered printing the hull points as output, but at our larger values of "n", there's no way that output would make any human readable sense. (At least 10ish points in the n=100 case.)
     - Though we did initially test with smaller arrays of points and can confirm the algorithm works.
